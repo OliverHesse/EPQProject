@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+    </head>
+    <body>
+        <div style = "height: 80px; width: 100%;">
+            <div id="tab_holder" style="height: 100%;width: 100%; display: flex; ">
+                <div id="tab1" class="tab">
+                    <button id="active_file_tab">
+                        <div id="file_drop_down_btn" >
+                            <div class="file_drop_down"></div>
+                            <div class="file_drop_down"></div>
+                            <div class="file_drop_down"></div>
+                            
+                        </div>
+                        <div style="width: 100%;display: flex; justify-content: center; align-items: center; " >FileName.cl</div>
+                    </button>
+                    <div style="display: flex;">
+                        <button class = "file-dow-upl-btn">
+                            <img width="46px" height="44px" src = "assets/DownloadFile.svg" alt="DownloadFile"/>
+                        </button>
+                        <button class = "file-dow-upl-btn">
+                            <img width="46px" height="44px" src = "assets/UploadFile.svg" alt="UploadFile"/>
+                        </button>
+                    </div>
+
+                    <button id="run_btn">Run</button>
+                </div>
+                <div id="tab2" class="tab">
+                    <div style="display: flex; gap: 10px; position: absolute; right:200px; align-items: center; color: white; font-size: 1.3rem;">
+                        <button onclick="onShowLastClick(this)" id="slider_btn">
+                            <div class="active_slider"></div>
+                            <div class="active_slider_circle"></div>
+                        </button>
+                        <span>Show Only Last</span>
+                    </div>
+                    <button id="clear_btn">Clear</button>
+                </div> 
+            </div>
+      
+        </div>
+        <div style="height: 100%;width: 100; display: table-row;">
+            <div style="height: 100%;width: 100%; display: flex;">
+                <div class = "text_holder" id="input_div">
+
+                </div>
+
+                <div  class = "text_holder" id="output_div">
+
+                </div>
+            </div>
+        </div>
+
+        <script src="index.js"></script>
+    </body>
+
+</html>
