@@ -3,7 +3,8 @@ let default_name_num =1
 let file_holder = document.getElementById("file_nav");
 const file_nav_btn = document.getElementById("file_drop_down_btn")
 const file_action_window = document.getElementById("file_action_window")
-let html_text='<div class="filename" style="width:90%;font-size:1.2rem;">'+'File'+default_name_num+'</div>';
+
+let html_text='<div class="filename" style="width:90%;font-size:1.2rem;">'+'File'+'</div>';
 
 let html_button = document.createElement("button")
 html_button.id = "file_actions_btn" 
@@ -120,7 +121,8 @@ function changeActiveFile(e){
 }
 function onAddFileClick(e){
 
-    
+    let html_text='<div class="filename" style="width:90%;font-size:1.2rem;">'+'File'+default_name_num+'</div>';
+
     let tempDiv = document.createElement('button');
     tempDiv.className = "storedFileTab";
     tempDiv.id = "File"+default_name_num
@@ -128,7 +130,7 @@ function onAddFileClick(e){
     
     let html_button = document.createElement("button")
     html_button.id = "file_actions_btn" 
-    html_button.addEventListener("click",openFileActions)
+    
     html_button.innerHTML = html_text2
     tempDiv.appendChild(html_button);
     tempDiv.addEventListener("click",changeActiveFile)
