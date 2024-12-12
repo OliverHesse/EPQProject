@@ -5,17 +5,18 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
     </head>
     <body>
+
         <div style = "height: 80px; width: 100%;">
             <div id="tab_holder" style="height: 100%;width: 100%; display: flex; ">
                 <div id="tab1" class="tab">
-                    <button id="active_file_tab">
-                        <div id="file_drop_down_btn" >
+                    <button  id="active_file_tab">
+                        <div onclick = "openFileHolder(this)" id="file_drop_down_btn" >
                             <div class="file_drop_down"></div>
                             <div class="file_drop_down"></div>
                             <div class="file_drop_down"></div>
                             
                         </div>
-                        <div style="width: 100%;display: flex; justify-content: center; align-items: center; " >FileName.cl</div>
+                        <div id="active_file_name" style="width: 100%;display: flex; justify-content: center; align-items: center; " >File.cl</div>
                     </button>
                     <div style="display: flex;">
                         <button class = "file-dow-upl-btn">
@@ -41,18 +42,79 @@
             </div>
       
         </div>
-        <div style="height: 100%;width: 100; display: table-row;">
-            <div style="height: 100%;width: 100%; display: flex;">
+        
+        <div style="height: 100%; display: table-row;">
+            <div class = "hide" id="file_nav">
+
+                <button onclick="onAddFileClick(this)" id="add_file_btn">
+                    <div class="plus1"></div>
+                    <div class ="plus2"></div>
+                </button>
+            </div>
+            <div style="height: 100%; width: 100%; display: flex;">
                 <div class = "text_holder" id="input_div">
 
                 </div>
 
                 <div  class = "text_holder" id="output_div">
 
+                    <div style="width: 100%; border-width: 1px; border-style: solid; border-color: white;">
+                        <div style="display: flex; align-items: center; gap:40px; position: relative; height:30px;">
+                            <button class ="runtime_drop_down" onclick="onChangeOldRuntimeState(this)">
+                                <div class = "drop_down_closed_line1"></div>
+                                <div class = "drop_down_closed_line2"></div>
+                            </button>
+                            <div style="color: white; font-size: 1.3rem;">File</div>
+                        </div>
+                        <div class="runtime_text_area hide">
+                            some
+                            example
+                            text
+                            to
+                            make
+                            a
+                            point
+                        </div>
+                    </div>
+
+                    <div style="width: 100%; border-width: 1px; border-style: solid; border-color: white;">
+                        <div style="display: flex; align-items: center; gap:40px; position: relative; height:30px;">
+                            <button class ="runtime_drop_down" onclick="onChangeOldRuntimeState(this)">
+                                <div class = "drop_down_closed_line1"></div>
+                                <div class = "drop_down_closed_line2"></div>
+                            </button>
+                            <div style="color: white; font-size: 1.3rem;">File</div>
+                        </div>
+                        <div class="runtime_text_area hide">
+                            some
+                            differnt
+                            text
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+        <div id="file_action_window" class="onTOP hide" >
+            <button class = "file_actions_btn">
+                <img width="20px"height="20px" src="assets/Pencil.svg" alt="Pencil">
+                <div style="font-size: 1.4rem;">Rename</div>
+            </button>
+            <button class = "file_actions_btn">
+                <img width="20px"height="20px"  src="assets/DownloadFileSmall.svg" alt="DownloadFile">
+                <div style="font-size: 1.4rem;">Download</div>
+            </button>
+            <button class = "file_actions_btn" alt="Duplicate">
+                <div class = "duplicate dup-1"></div>
+                <div class = "duplicate dup-2"></div>
+                <div style="position:absolute; left: 35px; font-size: 1.4rem;">Duplicate</div>
+            </button>
+            <button class = "file_actions_btn">
+                <img width="20px"height="20px" src="assets/Trash.svg" alt="Trash" >
+                <div style="font-size: 1.4rem;">Delete</div>
+            </button>
 
+        </div>
         <script src="index.js"></script>
     </body>
 
