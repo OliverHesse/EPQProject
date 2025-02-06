@@ -47,29 +47,7 @@ document.addEventListener("click",function(e){
 
 })
 
-function onChangeOldRuntimeState(e){
-    if(e.children[0].classList.contains("drop_down_closed_line3")){
-        e.children[0].classList.remove("drop_down_closed_line3")
-        e.children[0].classList.add("drop_down_closed_line1")
-    }else{
-        e.children[0].classList.remove("drop_down_closed_line1")
-        e.children[0].classList.add("drop_down_closed_line3")
-    }
-    if(e.children[1].classList.contains("drop_down_closed_line4")){
-        e.children[1].classList.remove("drop_down_closed_line4")
-        e.children[1].classList.add("drop_down_closed_line2")
-    }else{
-        e.children[1].classList.remove("drop_down_closed_line2")
-        e.children[1].classList.add("drop_down_closed_line4") 
-    }
-    let text_area = e.parentNode.parentNode.children[1]
-    if(text_area.classList.contains("hide")){
-        text_area.classList.remove("hide")
-    }else{
-        text_area.classList.add("hide")
-    }
-    console.log(e);
-}
+
 
 function onShowLastClick(e){
     console.log(e);
