@@ -118,7 +118,10 @@ class FOR extends AST{
         this.self_scope = {"curr":{}};
         this.self_scope["prev"] = scope;
         let result = await this.ini_node.eat_self(this.self_scope)
-        
+        //should return the id of the counter since it should be the only variable defined at this point in the scope
+        let counter_id = Object.keys(this.self_scope["curr"])[0] 
+        console.log("id is:")
+        console.log(counter_id) 
         while(true){
             let condition = await this.condition.eat_self(this.self_scope)
             if(condition["val"] != true){
@@ -135,6 +138,13 @@ class FOR extends AST{
 
             
             let statement = await this.statement.eat_self(this.self_scope);
+
+            let temp_counter = this.self_scope["curr"][counter_id];
+            this.self_scope["curr"] = {} //for some reason {counter_id:temp_counter} makes the key counter_id not the val
+            this.self_scope["curr"][counter_id] = temp_counter
+            console.log("REFRESHING SCPOE");
+            console.log(this.self_scope) 
+            
         }
         
     }
@@ -367,12 +377,10 @@ class FUNCTION{
     }
     async run(args,scope){
         console.log("FUNCTION CALLED")
-        let param_scope = this.local_scope
-        if("curr" in scope){
-            param_scope = {"curr":this.local_scope,"prev":scope}
-        }
-        this.local_scope = {}
-
+        let param_scope = {"curr":this.local_scope,"prev":scope}
+        
+        console.log("generate param scope:")
+        console.log(param_scope)
         //check that all args are valid
         //first check if there are the same amount of args]
    
@@ -401,8 +409,9 @@ class FUNCTION{
         //now add each to the scope
        
         for (let i = 0; i < args.length; i++) {
-            console.log("parsing arg")
-            let arg = args[i].eat_self(param_scope)
+            console.log("parsing arg with scope")
+            console.log(param_scope);
+            let arg = await args[i].eat_self(param_scope)
             console.log("arg parsed");
             if(literal_to_type[arg["type"]] != this.param_list[i]["type"]){
                 runtime_error("expected type "+this.param_list[i]["type"] + " for parameter "+this.param_list[i]["id"]+ " got "+ literal_to_type[arg["type"]])
