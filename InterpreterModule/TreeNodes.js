@@ -358,7 +358,33 @@ class RETURN extends AST{
     }
 }
 
-
+class WHILE extends AST{
+    constructor(condition,statement_list){
+        super();
+        this.condition = condition;
+        this.statement_list = statement_list;
+    }
+    async eat_self(scope){
+        let local_scope = {"curr":{},"prev":scope}
+    
+        
+        while(true){
+            let condition = await this.condition.eat_self(local_scope)
+            if(condition["val"] != true){
+                break
+            }
+            for(const node of this.statement_list){
+                let result = await node.eat_self(local_scope);
+                if(result != undefined){
+                    return result;
+                }
+            }
+           
+      
+            
+        }
+    }
+}
 
 class FUNCTION{
     constructor(root,param_list,type,scope_name) {
@@ -378,7 +404,7 @@ class FUNCTION{
     async run(args,scope){
         console.log("FUNCTION CALLED")
         let param_scope = {"curr":this.local_scope,"prev":scope}
-        
+
         console.log("generate param scope:")
         console.log(param_scope)
         //check that all args are valid

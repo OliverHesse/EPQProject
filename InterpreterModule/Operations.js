@@ -65,7 +65,7 @@ const BinaryOperations = {
 };
 const  operation_priority ={
     0:["AND","OR"],
-    1:["EQ","GE","LE","LT","NE"],
+    1:["EQ","GE","LE","LT","NE","GT"],
     2:["PLUS","SUB"],
     3:["REAL_DIV","INT_DIV","MUL","MOD"],
     4:["POW"]

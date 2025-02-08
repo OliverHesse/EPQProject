@@ -164,7 +164,8 @@ class Parser{
     }
     hackystuff(){
         this.eat("ClosedCurly")
-        //very hacky to not try at home
+        //very hacky do not try at home
+        //treats closed curly brackets as semi colons so they can work in statement lists properly
         this.tokens.splice(this.current_position, 0, new Token("SEMI",";"));
         this.current_token = this.tokens[this.current_position];
       
@@ -198,7 +199,17 @@ class Parser{
             this.hackystuff();
             return new CONDITIONAL_IF(conditions,true_statement_list,false_statement_list);
         }
-
+        if(this.current_token.type == "WHILE"){
+            this.eat("WHILE");
+            this.eat("OpenBracket");
+            //looking for condition
+            let condition = this.expr(); 
+            this.eat("ClosedBracket");
+            this.eat("OpenCurly");
+            let nodes = this.func_statement_list();
+            this.hackystuff()
+            return new WHILE(condition,nodes)
+        }
         if(this.current_token.type == "FOR"){
           
             this.eat("FOR");
