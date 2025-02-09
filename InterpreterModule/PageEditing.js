@@ -1,5 +1,5 @@
-let input = document.getElementById("in");
-let out = document.getElementById("out");
+let input = document.getElementById("input_div");
+let out = document.getElementById("output_div");
 let output = "";
 let canRun = false
 let input_field = document.getElementById("input_field")

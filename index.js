@@ -115,3 +115,82 @@ function onAddFileClick(e){
     file_holder.insertBefore(tempDiv,file_holder.lastElementChild );
     default_name_num += 1;
 }
+const editor = document.getElementById("input_div");
+console.log(editor.children)
+console.log(editor.childNodes)
+let shouldFireChange = false;
+editor.addEventListener("input", function() {
+  shouldFireChange = true;
+  
+  console.log("test")
+  //TODO work in progress
+  //highlight_key_words()
+});
+//editor.addEventListener("focusout", function() {
+  //if(shouldFireChange) {
+    //shouldFireChange = false;
+    // add emulated 'onchange' code here
+    //console.log("changing colors")
+    //highlight_key_words()
+  //}
+//});
+
+
+
+
+function highlight_key_words(){
+    //actualy returns lines
+    let lines = editor.childNodes
+    let current_line = -1
+   
+    console.log(relativeSelection)
+    for(const line of lines){
+        if(line.nodeName == "DIV"){
+            current_line += 1
+            let output_text = ""
+            
+            for(const node of line.childNodes){
+              
+               
+         
+                if (node.nodeName == "SPAN"){
+                    //check if nodes is a valid keyword/true false or number
+                    if(!(node.innerHTML in RESERVED_KEYWORDS)){
+                        output_text += node.innerHTML;
+                       
+                    }else{
+                        output_text += node.outerHTML;
+                       
+                    }
+                }else if(node.nodeName == "#text"){
+                
+                    output_text += color_key_words(node.textContent);
+                }
+             
+                
+            }
+            line.innerHTML = output_text
+        }
+     
+      
+    }
+    
+
+
+}
+function clear_empty_or_broken_spans(){}
+function color_key_words(text){
+    let new_text = text ||""
+    let colors = {number:"#a7e022",keyword:"#0033B3",true_false:"#db2abe"};
+ 
+    for(const keyword of Object.keys(RESERVED_KEYWORDS)){
+
+        const regex = new RegExp(`\\b(${keyword})\\b`, 'g'); // Matches whole words only
+        
+        new_text = new_text.replace(regex, `<span style="color: #0033B3;">${keyword}</span>`);
+        
+    }
+
+    
+    return new_text
+}

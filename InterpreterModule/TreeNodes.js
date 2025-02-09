@@ -403,6 +403,7 @@ class FUNCTION{
     }
     async run(args,scope){
         console.log("FUNCTION CALLED")
+        this.local_scope = {}
         let param_scope = {"curr":this.local_scope,"prev":scope}
 
         console.log("generate param scope:")
