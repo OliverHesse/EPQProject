@@ -19,7 +19,7 @@
                         <div id="active_file_name" style="width: 100%;display: flex; justify-content: center; align-items: center; " >File.cl</div>
                     </button>
                     <div style="display: flex;">
-                        <button class = "file-dow-upl-btn">
+                        <button class = "file-dow-upl-btn" onclick="onDownloadCurrentFileClicked()">
                             <img width="46px" height="44px" src = "assets/DownloadFile.svg" alt="DownloadFile"/>
                         </button>
                         <button class = "file-dow-upl-btn">
@@ -57,26 +57,35 @@
             </div>
         </div>
         <div id="file_action_window" class="onTOP hide" >
-            <button class = "file_actions_btn">
+            <button class = "file_actions_btn" onclick="start_renaming_process()">
                 <img width="20px"height="20px" src="assets/Pencil.svg" alt="Pencil">
                 <div style="font-size: 1.4rem;">Rename</div>
             </button>
-            <button class = "file_actions_btn">
+            <button class = "file_actions_btn" onclick="onFileDownloadPressed()">
                 <img width="20px"height="20px"  src="assets/DownloadFileSmall.svg" alt="DownloadFile">
                 <div style="font-size: 1.4rem;">Download</div>
             </button>
-            <button class = "file_actions_btn" alt="Duplicate">
+            <button class = "file_actions_btn" alt="Duplicate" onclick="duplicate_file()">
                 <div class = "duplicate dup-1"></div>
                 <div class = "duplicate dup-2"></div>
                 <div style="position:absolute; left: 35px; font-size: 1.4rem;">Duplicate</div>
             </button>
-            <button class = "file_actions_btn">
+            <button class = "file_actions_btn" onclick="delete_file()">
                 <img width="20px"height="20px" src="assets/Trash.svg" alt="Trash" >
                 <div style="font-size: 1.4rem;">Delete</div>
             </button>
 
         </div>
-        <!–– TEMP SO I CAN USE SOME VARIABLES-->
+        <div class="modal">
+            <div id="renaming_modal" class = "modal_content">
+                <input type="text" id="rename_input" >
+                <div>
+                    <button id="confirm_rename" onclick="confirm_change_file_name()">Confirm</button>
+                    <button id="cancel_rename" class = "modal_btn" onclick="cancel_rename()">Close</button>
+                </div>
+            </div>
+        </div>
+ 
         <script src="InterpreterModule/PageEditing.js"></script>
         <script src="InterpreterModule/Operations.js"></script>
         <script src="InterpreterModule/Lexer.js"></script>
