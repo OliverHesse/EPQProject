@@ -145,26 +145,28 @@ function changeActiveFile(e){
     load_file(file_name)
     
 }
-function onAddFileClick(text){
-    let invalid_name = true;
-    while(invalid_name){
-        if("File"+default_name_num in file_data_holder){
-            default_name_num += 1;
-        }else{
-            invalid_name = false;
+function onAddFileClick(text,file_name){
+    if(file_name == undefined){
+        let invalid_name = true;
+        while(invalid_name){
+            if("File"+default_name_num in file_data_holder){
+                default_name_num += 1;
+            }else{
+                invalid_name = false;
+            }
         }
     }
-
+    let new_file_name = file_name || 'File' + default_name_num;
     if (typeof text === 'string' || text instanceof String){
-        file_data_holder['File'+default_name_num] = text;
+        file_data_holder[new_file_name] = text;
     }else{
-        file_data_holder['File'+default_name_num] = "";
+        file_data_holder[new_file_name] = "";
     }
 
-    let html_text='<div class="filename" style="width:90%;font-size:1.2rem;">'+'File'+default_name_num+'</div>';
+    let html_text='<div class="filename" style="width:90%;font-size:1.2rem;">'+new_file_name+'</div>';
     let tempDiv = document.createElement('button');
     tempDiv.className = "storedFileTab";
-    tempDiv.id = "File"+default_name_num
+    tempDiv.id = new_file_name
     tempDiv.innerHTML = html_text
     
     let html_button = document.createElement("button")
@@ -327,4 +329,35 @@ function cancel_rename(){
     let modal = document.getElementsByClassName("modal")[0]
     
     modal.style.display = "none";   
+}
+
+function startFileUpload(){
+    let input_div = document.createElement("input")
+    input_div.type = "file"
+    input_div.addEventListener("change",async (event)=>{
+        let file = event.target.files[0]
+        console.log(file);
+        let text = await file.text();
+        console.log("file text here:")
+        console.log(text);
+        let file_name = file.name
+        if(!(file_name.endsWith(".txt"))){
+            return;
+        }
+        file_name = file_name.replace(".txt","")
+        if(file_name in file_data_holder){
+            let unique_name = false;
+            let number = 1;
+            while(!unique_name){
+                if(file_name+"("+number+")" in file_data_holder){
+                    number += 1
+                }else{
+                    file_name = file_name+"("+number+")";
+                    unique_name = true
+                }
+            }
+        }
+        onAddFileClick(text,file_name)
+    })
+    input_div.click();
 }
