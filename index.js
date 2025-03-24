@@ -258,6 +258,11 @@ function color_key_words(text){
     return new_text
 }
 
+function clear_output(){
+    console.log("here")
+    console.log(document.getElementById("output_div"))
+    document.getElementById("output_div").innerHTML = "";
+}
 
 function onFileDownloadPressed(event){
     let file_name = file_action_file_name;
@@ -274,10 +279,13 @@ function delete_file(e){
     //delete file here
     file_div.remove();
     delete file_data_holder[file_name]
-
+    console.log(file_name)
+    console.log(active_file)
     if(file_name == active_file){
         //need to make new active file 
-        let new_active = file_holder.firstChild.id
+        console.log("test")
+        console.log(file_holder.children[0])
+        let new_active = file_holder.children[0].id
         let div =document.getElementById("active_file_name");
         div.innerHTML = new_active +".cl"
         load_file(new_active)        
